@@ -7,6 +7,7 @@ public class SampleCubePlacer : MonoBehaviour
     private Grid grid;
     [SerializeField]
     private GameObject cubePrefab;
+    private int blockSelectCounter = 0;
     void Awake(){
         grid = FindObjectOfType<Grid>();
     }
@@ -25,10 +26,15 @@ public class SampleCubePlacer : MonoBehaviour
                 }
             }
         }
+        if(Input.GetKeyDown(KeyCode.G)){
+            blockSelectCounter++;
+            if(blockSelectCounter >= PrefabDictionary.Instance.buildingBlockDictionary.Count) blockSelectCounter = 0;
+        }
     }
 
     private void PlaceCubeNear(Vector3 nearPoint){
         Vector3 finalPosition = grid.GetNearestPointOnGrid(nearPoint) + new Vector3(grid.CellSize/2f,grid.CellSize/2f,grid.CellSize/2f);
-        GameObject cube = Instantiate(cubePrefab,finalPosition,Quaternion.identity);
+        BuildingBlock bb = PrefabDictionary.Instance.buildingBlockDictionary[blockSelectCounter];
+        GameObject cube = Instantiate(bb.blockPrefab,finalPosition,Quaternion.identity);
     }
 }

@@ -8,9 +8,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     private int cellSize;
     [SerializeField]
-    private int zSize;
+    private int zSize = 10;
     [SerializeField]
-    private int xSize;
+    private int xSize = 10;
     
     private int width;
     private int height;
