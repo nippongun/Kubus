@@ -15,7 +15,7 @@ public class Grid : MonoBehaviour
     private int width;
     private int height;
     
-
+    private Vector3 gridOffset;
     
     public int Width { get { return width; } }
     public int Height { get { return height; } }
@@ -43,7 +43,8 @@ public class Grid : MonoBehaviour
     void Start(){
         width = xSize * cellSize;
         height = zSize * cellSize;
-        //transform.position = new Vector3(cellSize/2f,0,cellSize/2f);
+        gridOffset = new Vector3(cellSize/2f,0,cellSize/2f);
+        DrawGridLines();
     }
 
 
@@ -58,5 +59,27 @@ public class Grid : MonoBehaviour
         return result;
     }
 
+    private void OnDrawGizmos(){
+        if(Time.timeScale > 0){
+            Gizmos.color = Color.red;
 
+            for (int x = 0; x < (xSize)*(zSize); x++)
+            {
+                Gizmos.DrawSphere(new Vector3((x%xSize)*cellSize,0f,Mathf.Floor(x/xSize)*cellSize) + gridOffset,10f);
+            }
+        }
+    }
+
+    private void DrawGridLines(){
+        LineRenderer line = gameObject.AddComponent<LineRenderer>();
+        line.sortingLayerName = "OnTop";
+        line.sortingOrder = 5;
+
+        line.positionCount = 6*xSize;
+
+        line.SetPosition(0, new Vector3(0f,0f,0f));
+        line.SetPosition(1, new Vector3(cellSize*xSize,0f,0f));
+        line.SetPosition(2, new Vector3(cellSize*xSize,0f,cellSize*zSize));
+        line.SetPosition(3, new Vector3(0f,0f,cellSize*zSize));
+    }
 }

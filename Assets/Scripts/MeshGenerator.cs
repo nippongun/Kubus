@@ -68,15 +68,4 @@ public class MeshGenerator : MonoBehaviour
         MeshCollider meshCollider = gameObject.GetComponent<MeshCollider>();
         meshCollider.sharedMesh = mesh;
     }
-
-    private void OnDrawGizmos(){
-        if(Time.timeScale > 0){
-            Gizmos.color = Color.red;
-
-            for (int x = 0; x < vertices.Length; x++)
-            {
-                Gizmos.DrawSphere(vertices[x],10f);
-            }
-        }
-    }
 }
