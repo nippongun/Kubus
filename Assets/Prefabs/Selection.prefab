@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6385129195466672202}
   - component: {fileID: 7910495910227613502}
   - component: {fileID: 2983734969155450276}
+  - component: {fileID: 1571386336042811861}
   m_Layer: 5
   m_Name: Selection
   m_TagString: Untagged
@@ -38,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 863, y: 864}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7503663368733437256
 CanvasRenderer:
@@ -119,7 +120,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7503663368733437257}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1571386336042811861}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7910495910227613502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,12 +145,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 16
-  m_MinHeight: 16
-  m_PreferredWidth: 120
-  m_PreferredHeight: 120
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: 1
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 64
+  m_PreferredHeight: 64
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
   m_LayoutPriority: 1
 --- !u!114 &2983734969155450276
 MonoBehaviour:
@@ -153,4 +165,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 0
-  m_AspectRatio: 0.9988426
+  m_AspectRatio: 1
+--- !u!114 &1571386336042811861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503663368733437239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4cc593ca2fb6f90ca30685ff7547fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0

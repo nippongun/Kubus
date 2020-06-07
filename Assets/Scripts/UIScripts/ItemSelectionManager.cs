@@ -27,6 +27,7 @@ public class ItemSelectionManager : MonoBehaviour
             gameObject = Instantiate(itemSelectionTile,transform.parent);
             items.Add(gameObject);
             gameObject.transform.SetParent(this.transform);
+            gameObject.GetComponent<SelectionItemHandler>().id = i;
         }
     }
 }

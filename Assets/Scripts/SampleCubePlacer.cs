@@ -10,6 +10,7 @@ public class SampleCubePlacer : MonoBehaviour
     private int blockSelectCounter = 0;
     void Awake(){
         grid = FindObjectOfType<Grid>();
+        GameEvents.current.onSelectionClick += GetBlockID;
     }
 
     void Update(){
@@ -36,5 +37,9 @@ public class SampleCubePlacer : MonoBehaviour
         Vector3 finalPosition = grid.GetNearestPointOnGrid(nearPoint) + new Vector3(grid.CellSize/2f,grid.CellSize/2f,grid.CellSize/2f);
         BuildingBlock bb = PrefabDictionary.Instance.buildingBlockDictionary[blockSelectCounter];
         GameObject cube = Instantiate(bb.blockPrefab,finalPosition,Quaternion.identity);
+    }
+
+    private void GetBlockID(int id){
+        blockSelectCounter = id;
     }
 }
