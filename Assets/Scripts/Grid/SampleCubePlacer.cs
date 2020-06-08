@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SampleCubePlacer : MonoBehaviour
 {
-    private Grid grid;
+    private static Grid grid;
     [SerializeField]
     private GameObject cubePrefab;
     private int blockSelectCounter = 0;
-    void Awake(){
+    void Start(){
         grid = FindObjectOfType<Grid>();
         GameEvents.current.onSelectionClick += GetBlockID;
     }
@@ -22,9 +22,7 @@ public class SampleCubePlacer : MonoBehaviour
             if (Physics.Raycast(ray, out hitInfo))
             {
                 Debug.Log(hitInfo.point + " --- " + hitInfo.normal);
-                if(hitInfo.point.x <= grid.Height && hitInfo.point.z <= grid.Width){
-                    PlaceCubeNear(hitInfo.point+ (hitInfo.normal/grid.CellSize));
-                }
+                PlaceCubeNear(hitInfo.point+ (hitInfo.normal/grid.CellSize));
             }
         }
         if(Input.GetKeyDown(KeyCode.G)){
@@ -35,8 +33,15 @@ public class SampleCubePlacer : MonoBehaviour
 
     private void PlaceCubeNear(Vector3 nearPoint){
         Vector3 finalPosition = grid.GetNearestPointOnGrid(nearPoint) + new Vector3(grid.CellSize/2f,grid.CellSize/2f,grid.CellSize/2f);
-        BuildingBlock bb = PrefabDictionary.Instance.buildingBlockDictionary[blockSelectCounter];
-        GameObject cube = Instantiate(bb.blockPrefab,finalPosition,Quaternion.identity);
+
+
+        if(finalPosition.x >= 0 && finalPosition.z >= 0 && finalPosition.z <= grid.Height && finalPosition.x <= grid.Width){
+            Grid.current.InsertBlock(finalPosition,blockSelectCounter);
+            BuildingBlock bb = PrefabDictionary.Instance.buildingBlockDictionary[blockSelectCounter];
+            GameObject cube = Instantiate(bb.blockPrefab,finalPosition,Quaternion.identity);
+        } else {
+            Debug.Log("Block out of bounds");
+        }
     }
 
     private void GetBlockID(int id){

@@ -21,12 +21,15 @@ public class CameraController : MonoBehaviour
     public Vector3 dragCurrentPosition;
     public Vector3 rotateStartPosition;
     public Vector3 rotateCurrentPosition;
+
+    private LayerMask layerUI;
     // Start is called before the first frame update
     void Start()
     {
         newPosition = transform.position;
         newRotation = transform.rotation;
         newZoom = cameraTransform.localPosition;
+        layerUI = LayerMask.NameToLayer("UI");
     }
 
     // Update is called once per frame
@@ -46,11 +49,16 @@ public class CameraController : MonoBehaviour
         if(Input.GetMouseButtonDown(0)){
             Plane plane = new Plane(Vector3.up, Vector3.zero);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
             float entry;
 
             if(plane.Raycast(ray, out entry)){
                 dragStartPosition = ray.GetPoint(entry);
+
+                if(Physics.Raycast(ray, out hit, Mathf.Infinity,~layerUI)){
+                    //dragStartPosition = ray.GetPoint(entry);
+                }
             }
         }
 
@@ -58,13 +66,17 @@ public class CameraController : MonoBehaviour
         {
             Plane plane = new Plane(Vector3.up, Vector3.zero);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
+            RaycastHit hit;
             float entry;
 
             if(plane.Raycast(ray, out entry)){
                 dragCurrentPosition = ray.GetPoint(entry);
-
                 newPosition = transform.position + dragStartPosition - dragCurrentPosition;
+
+                if(Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerUI)){
+                    //dragCurrentPosition = ray.GetPoint(entry);
+                    //newPosition = transform.position + dragStartPosition - dragCurrentPosition;
+                }
             }
         }
 
