@@ -14,4 +14,9 @@ public class GameEvents : MonoBehaviour
     public void SelectionClickEvent(int id){
         onSelectionClick(id);
     }
+
+    public event Action<Vector2Int> onStreetUpdate;
+    public void StreetUpdateEvent(Vector2Int p){
+        onStreetUpdate(p);
+    }
 }

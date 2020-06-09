@@ -15,50 +15,54 @@ public class Street : MonoBehaviour
     }
     public void AddStreet(Vector3 position){
         position = position / Grid.current.CellSize;
-        
-
-        if((int)position.x == 0){
-            bitmap |= (int)StreetDirections.WEST;
-        }
-        if((int)position.x == Grid.current.XSize - 1){
-            bitmap |= (int)StreetDirections.EAST;
-        }
-        if((int)position.z == 0){
-            bitmap |= (int)StreetDirections.SOUTH;
-        }
-        if((int)position.z == Mathf.RoundToInt(Grid.current.ZSize) -1){
-            bitmap |= (int)StreetDirections.NORTH;
-        }
-       
 
         Vector2Int p = new Vector2Int((int)position.x,(int)position.z);
         
-        
-
         Debug.Log("Print return value of StreetmManager:"+StreetManager.current[(int)p.x,(int)p.y]);
 
         // Above
-        bool alone = true;
-        if (StreetManager.current[p.x,p.y+1] != 0)
-        {
-            bitmap |= (int)StreetDirections.NORTH;
-            alone = false; 
-        }if(StreetManager.current[p.x+1,p.y] != 0){
-            bitmap |= (int)StreetDirections.EAST;
-            alone = false;
-        }if(StreetManager.current[p.x,p.y-1] != 0){
-            bitmap |= (int)StreetDirections.SOUTH;
-            alone = false;
-        }if(StreetManager.current[p.x-1,p.y] != 0){
-            bitmap |= (int)StreetDirections.WEST;
-            alone = false;
-        }
-        if(alone){
+        if(UpdateBitmap(position)){
             bitmap = (int)StreetDirections.REGULAR;
         }
 
-        StreetManager.current.AddStreetToArray(p,bitmap);
+        StreetManager.current.AddStreetToArray(p,bitmap,this);
         Debug.Log(p);
         Debug.Log("Type: Street - Position:" + position + " - bitmap " + bitmap);
     }
+
+    bool UpdateBitmap(Vector3 position){
+        Vector2Int p = new Vector2Int((int)position.x,(int)position.z);
+        bool alone = true;
+        if((int)position.z < Mathf.RoundToInt(Grid.current.ZSize) -1 && StreetManager.current[p.x,p.y+1]!= null){
+            if (StreetManager.current[p.x,p.y+1].bitmap != 0 )
+            {
+                bitmap |= (int)StreetDirections.NORTH;
+                alone = false; 
+            }
+        }
+        if((int)position.x < Grid.current.XSize - 1 && StreetManager.current[p.x+1,p.y] != null){
+            if(StreetManager.current[p.x+1,p.y].bitmap != 0 ){
+                bitmap |= (int)StreetDirections.EAST;
+                alone = false;
+            }
+        }
+        if((int)position.z > 0 && StreetManager.current[p.x,p.y-1] != null){
+            if(StreetManager.current[p.x,p.y-1].bitmap != 0 ){
+                bitmap |= (int)StreetDirections.SOUTH;
+                alone = false;
+            }
+        }
+        if((int)position.x > 0 && StreetManager.current[p.x-1,p.y] != null){
+            if(StreetManager.current[p.x-1,p.y].bitmap != 0 ){
+                bitmap |= (int)StreetDirections.WEST;
+                alone = false;
+            }
+        }
+
+        GameEvents.current.StreetUpdateEvent(p);
+
+        return alone;
+    }
+
+
 }
