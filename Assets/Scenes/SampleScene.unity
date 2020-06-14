@@ -376,7 +376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481125810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 100, z: -100}
+  m_LocalPosition: {x: 500, y: 500, z: -500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1223721192}
@@ -928,6 +928,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448dae1e7148a84ab9c12d22bce4907d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  streetTiles:
+  - {fileID: 11400000, guid: 5a8c415accbf67166841c95219f38257, type: 2}
+  - {fileID: 11400000, guid: 4028568e7bdcb602e927ea91f7fd35b7, type: 2}
+  - {fileID: 11400000, guid: 33f7ca92d264841dc84eed41ae71e21b, type: 2}
+  - {fileID: 11400000, guid: a9114fd3f150700c08dce800e2a43fc6, type: 2}
+  - {fileID: 11400000, guid: ca46dfe6035b1c23cb27d36860666886, type: 2}
+  - {fileID: 11400000, guid: 80ba1fff4cc2b35a1bd5f2055a026530, type: 2}
+  - {fileID: 11400000, guid: 96850e5d98f9b1048955aff9a66f4bd9, type: 2}
+  - {fileID: 11400000, guid: d5e1101ed36306b9f8bbc50e9798a3c8, type: 2}
+  - {fileID: 11400000, guid: 1db26e331f4e1554a9c3e74a1d291f51, type: 2}
+  - {fileID: 11400000, guid: 9ca2d93028b1eb6d89c615e20b2e7002, type: 2}
+  - {fileID: 11400000, guid: 98124722393fdcb9cabdc4eba27d558b, type: 2}
+  - {fileID: 11400000, guid: 13778268a7a1eeb4db1142aa6689ab10, type: 2}
+  - {fileID: 11400000, guid: 49d5fe622446346a5b0da11e23f3ebe5, type: 2}
+  - {fileID: 11400000, guid: be7868a36f75a608fbf7c0496f0d2ba5, type: 2}
+  - {fileID: 11400000, guid: 363da057943f96308a85b9cd7f43d143, type: 2}
+  - {fileID: 11400000, guid: 8ea32054912ff65699282b562290a739, type: 2}
 --- !u!1 &1849362394
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class Street : MonoBehaviour
 {
     public int bitmap;
 
+    public Material material;
     void Start(){
         AddStreet(transform.position);
     }
